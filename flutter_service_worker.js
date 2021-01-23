@@ -5,12 +5,12 @@ const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
   "version.json": "2a8de261a84fd7b19a0f4902850266e2",
 "manifest.json": "3aa090c891bfde34f0c4701768829ce2",
-"main.dart.js": "9f4bb306b488c8beb4dec658641de949",
+"main.dart.js": "38f10dab86efe78b4259e4c063fb054c",
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
-"index.html": "89190c7436bb7868ba3fcef48a84932a",
-"/": "89190c7436bb7868ba3fcef48a84932a",
-"assets/NOTICES": "4227cd164e296e1d57cf56043fa53fca",
+"index.html": "ec629a436dac9da257670bad0836a05d",
+"/": "ec629a436dac9da257670bad0836a05d",
+"assets/NOTICES": "6052b20f6e35414246a8eb8c71f1a214",
 "assets/packages/progress_dialog/assets/double_ring_loading_io.gif": "e5b006904226dc824fdb6b8027f7d930",
 "assets/packages/font_awesome_flutter/lib/fonts/fa-solid-900.ttf": "d21f791b837673851dd14f7c132ef32e",
 "assets/packages/font_awesome_flutter/lib/fonts/fa-brands-400.ttf": "3ca122272cfac33efb09d0717efde2fa",
@@ -175,7 +175,7 @@ async function downloadOffline() {
     }
     currentContent[key] = true;
   }
-  for (var resourceKey of Object.keys(RESOURCES)) {
+  for (var resourceKey in Object.keys(RESOURCES)) {
     if (!currentContent[resourceKey]) {
       resources.push(resourceKey);
     }
