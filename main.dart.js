@@ -81735,20 +81735,21 @@ O.Z2.prototype={
 $2:function(a,a0){var s,r,q,p,o,n,m,l,k,j,i,h,g,f=null,e=this.a,d=a0.b-50-(a0.d-50)*e.c,c=d/2,b=H.c([],t.t)
 for(s=e.f,r=e.e,q=0;q<s.length;++q){p=q-r
 o=-1<p&&p<3
-n=p>1?p:0
-m=H.b(J.a5(J.a5(s[q],"no"),"text"))+" "+H.b(n)
-l=$.nV
-if(l==null)H.lN(m)
-else l.$1(m)
-if(o){k=p>0
-j=k?p:0
-k=k?p:0
-i=p<0?30:1
-i=d-c*p*i
-i=i>0?i:0
-h=p>=2?p:0
+n=p>=1
+m=n?p:0
+l=H.b(J.a5(J.a5(s[q],"no"),"text"))+" "+H.b(m)
+k=$.nV
+if(k==null)H.lN(l)
+else k.$1(l)
+if(o){j=p>0
+i=j?p:0
+j=j?p:0
+h=p<0?30:1
+h=d-c*p*h
+h=h>0?h:0
+n=n?p:0
 g=e.Kn(s[q],!1)
-b.push(T.azv(25+20*k,new M.tg(new E.xU(e.Kn(s[q],!0),g,f),C.bx,h*20,C.a5,f,f,f,!0,C.p,C.P,f,f),f,f,25+i,C.o,25+20*j,f))}}P.f9("---------------------")
+b.push(T.azv(25+20*j,new M.tg(new E.xU(e.Kn(s[q],!0),g,f),C.bx,n*20,C.a5,f,f,f,!0,C.p,C.P,f,f),f,f,25+h,C.o,25+20*i,f))}}P.f9("---------------------")
 e=t.OB
 return T.dQ(C.ae,P.aj(new H.c_(b,e),!0,e.h("aG.E")),C.am,C.aa)},
 $S:600}
