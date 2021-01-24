@@ -53,7 +53,8 @@ self.addEventListener("install", (event) => {
         CORE.map(function (value) {
 
 try {
-return new Request(value + '?revision=' + RESOURCES[value], {'cache': 'reload'}); 
+	return new Request(value + '?revision=' + RESOURCES[value], {'cache': 'reload'});
+} 
 catch (error) {
   console.log(error);
 }
