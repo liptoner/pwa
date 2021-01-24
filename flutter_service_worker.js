@@ -143,9 +143,9 @@ self.addEventListener("fetch", (event) => {
   // If the URL is not the RESOURCE list then return to signal that the
   // browser should take over.
   if (key.endsWith('.mp3') || key.endsWith('.m4a')) {
-  	key = '/';
+  	event.request.url = evetn.request.url.replace('pwa/index.html#/', 'pwa/assets') 
   }
-  if (!RESOURCES[key]) {
+  else if (!RESOURCES[key]) {
     return;
   }
   // If the URL is the index.html, perform an online-first request.
