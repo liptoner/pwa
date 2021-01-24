@@ -38,7 +38,7 @@ const RESOURCES = {
 // The application shell files that are downloaded before a service worker can
 // start.
 const CORE = [
-  "/",
+  // "/",
 "main.dart.js",
 "index.html",
 "assets/NOTICES",
@@ -134,12 +134,13 @@ self.addEventListener("fetch", (event) => {
   if (key.indexOf('?v=') != -1) {
     key = key.split('?v=')[0];
   }
+  console.log('fetching: ', event.request.url);
   if (event.request.url == origin || event.request.url.startsWith(origin + '/#') || key == '') {
     key = '/';
   }
   // If the URL is not the RESOURCE list then return to signal that the
   // browser should take over.
-  if (!RESOURCES[key]) {
+  if (!RESOURCES[key] && !key.endsWith('.mp3') && !key.endsWith('.m4a')) {
     return;
   }
   // If the URL is the index.html, perform an online-first request.
