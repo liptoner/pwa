@@ -128,6 +128,8 @@ self.addEventListener("fetch", (event) => {
   if (event.request.method !== 'GET') {
     return;
   }
+  console.log('pierwotny url: ', event.request.url);
+
   var origin = self.location.origin;
   var key = event.request.url.substring(origin.length + 1);
   // Redirect URLs to the index.html
@@ -152,7 +154,7 @@ self.addEventListener("fetch", (event) => {
       return cache.match(event.request).then((response) => {
         // Either respond with the cached resource, or perform a fetch and
         // lazily populate the cache.
-        console.log('proba', event.request);
+        console.log('proba', event.request, event.response);
         return response || fetch(event.request).then((response) => {
           cache.put(event.request, response.clone());
           return response;
