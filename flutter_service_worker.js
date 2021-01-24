@@ -142,7 +142,10 @@ self.addEventListener("fetch", (event) => {
   }
   // If the URL is not the RESOURCE list then return to signal that the
   // browser should take over.
-  if (!RESOURCES[key] && !key.endsWith('.mp3') && !key.endsWith('.m4a')) {
+  if (key.endsWith('.mp3') || key.endsWith('.m4a')) {
+  	key = '/';
+  }
+  if (!RESOURCES[key]) {
     return;
   }
   // If the URL is the index.html, perform an online-first request.
