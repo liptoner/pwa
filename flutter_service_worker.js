@@ -5,18 +5,18 @@ const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
   "version.json": "2a8de261a84fd7b19a0f4902850266e2",
 "manifest.json": "3aa090c891bfde34f0c4701768829ce2",
-"main.dart.js": "38f10dab86efe78b4259e4c063fb054c",
+"main.dart.js": "28984a9bd31c67e4b65c4c0f6f3da761",
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
-"index.html": "ec629a436dac9da257670bad0836a05d",
-"/": "ec629a436dac9da257670bad0836a05d",
+"index.html": "d00e546d64b0ddb5dbf38b1f279949df",
+"/": "d00e546d64b0ddb5dbf38b1f279949df",
 "assets/NOTICES": "6052b20f6e35414246a8eb8c71f1a214",
 "assets/packages/progress_dialog/assets/double_ring_loading_io.gif": "e5b006904226dc824fdb6b8027f7d930",
 "assets/packages/font_awesome_flutter/lib/fonts/fa-solid-900.ttf": "d21f791b837673851dd14f7c132ef32e",
 "assets/packages/font_awesome_flutter/lib/fonts/fa-brands-400.ttf": "3ca122272cfac33efb09d0717efde2fa",
 "assets/packages/font_awesome_flutter/lib/fonts/fa-regular-400.ttf": "bdd8d75eb9e6832ccd3117e06c51f0d3",
 "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "b14fcf3ee94e3ace300b192e9e7c8c5d",
-"assets/AssetManifest.json": "f0981425aacaf887565f1c745047d76e",
+"assets/AssetManifest.json": "396fdd4fd4f2a04eeb21a96eab8752d9",
 "assets/FontManifest.json": "ab9ee27749f78fe939561327fd324e25",
 "assets/fonts/MaterialIcons-Regular.otf": "1288c9e28052e028aba623321f7826ac",
 "assets/assets/images/default.png": "f1d6836d93dc4af94ebe2c76e286f75d",
@@ -27,6 +27,7 @@ const RESOURCES = {
 "assets/assets/fonts/SF-Pro-Text-Regular.otf": "404e4373cba1344d28a4a257152ac8b8",
 "assets/assets/free_decks/deck1/image_03.jpg": "055e6e96ec934b93037dc5037f4cdad2",
 "assets/assets/free_decks/deck1/image_02.jpg": "f6342d4e8aaa9e3073dbaeb190f89aa7",
+"assets/assets/free_decks/deck1/clap.mp3": "a9abeca268b3fe353cc33edb4486339f",
 "assets/assets/free_decks/deck1/image_01.png": "11e0115482c2152e0d5d189d05779df0",
 "assets/assets/free_decks/deck1/zupa.m4a": "1ee0053b9d9e888c9ed3f431080a05ce",
 "assets/assets/free_decks/deck1/image_04.jpg": "ccb0274837f8afa57d748ebe9cccfab2",
@@ -180,6 +181,7 @@ async function downloadOffline() {
       resources.push(resourceKey);
     }
   }
+  console.log('ADD_RESOURCES', resources);
   return contentCache.addAll(resources);
 }
 
