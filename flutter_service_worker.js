@@ -53,10 +53,11 @@ self.addEventListener("install", (event) => {
         CORE.map(function (value) {
 
 try {
+	console.log(value + '?revision=' + RESOURCES[value]);
 	return new Request(value + '?revision=' + RESOURCES[value], {'cache': 'reload'});
 } 
 catch (error) {
-  console.log(error);
+  console.log('ERROR', error);
 }
 
 }));
@@ -150,6 +151,7 @@ self.addEventListener("fetch", (event) => {
       return cache.match(event.request).then((response) => {
         // Either respond with the cached resource, or perform a fetch and
         // lazily populate the cache.
+        console.log('proba', event.request);
         return response || fetch(event.request).then((response) => {
           cache.put(event.request, response.clone());
           return response;
@@ -200,10 +202,12 @@ function onlineFirst(event) {
   return event.respondWith(
     fetch(event.request).then((response) => {
       return caches.open(CACHE_NAME).then((cache) => {
+        console.log('print', event.request);
         cache.put(event.request, response.clone());
         return response;
       });
     }).catch((error) => {
+      console.log('error', error);
       return caches.open(CACHE_NAME).then((cache) => {
         return cache.match(event.request).then((response) => {
           if (response != null) {
