@@ -24,7 +24,10 @@
   <script>
   	console.log('serviceWorker 21231');
 
+  	console.log(Object.keys(navigator));
   	console.log(navigator, 'serviceWorker' in navigator);
+  	console.log('serviceWorker' in document);
+  	console.log('serviceWorker' in window);
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
