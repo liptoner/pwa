@@ -70,6 +70,7 @@ catch (error) {
 // MANIFEST, then use this to retain unchanged resource files.
 self.addEventListener("activate", function(event) {
 	console.log('EVENT (activate)', event);
+	return;
   return event.waitUntil(async function() {
     try {
       var contentCache = await caches.open(CACHE_NAME);
