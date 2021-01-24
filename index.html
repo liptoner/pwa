@@ -22,10 +22,8 @@
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
   <script>
-	console.log('ok ok');
-
   	console.log(navigator, 'serviceWorker' in navigator);
-
+		console.log('ok ok');
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
       	console.log('called sevice worker 123');
