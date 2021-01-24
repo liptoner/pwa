@@ -143,7 +143,8 @@ self.addEventListener("fetch", (event) => {
   // If the URL is not the RESOURCE list then return to signal that the
   // browser should take over.
   if (key.endsWith('.mp3') || key.endsWith('.m4a')) {
-  	event.request.url = event.request.url.replace('pwa/index.html#/', 'pwa/assets') 
+  	console.log('url: ', event.request.url.replace('pwa/index.html#/', 'pwa/assets'));
+  	event.request = new Request(event.request.url.replace('pwa/index.html#/', 'pwa/assets')); 
   }
   else if (!RESOURCES[key]) {
     return;
