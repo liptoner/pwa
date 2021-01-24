@@ -69,6 +69,7 @@ catch (error) {
 // install. If this service worker is upgrading from one with a saved
 // MANIFEST, then use this to retain unchanged resource files.
 self.addEventListener("activate", function(event) {
+	console.log('EVENT (activate)', event);
   return event.waitUntil(async function() {
     try {
       var contentCache = await caches.open(CACHE_NAME);
@@ -125,6 +126,7 @@ self.addEventListener("activate", function(event) {
 // The fetch handler redirects requests for RESOURCE files to the service
 // worker cache.
 self.addEventListener("fetch", (event) => {
+	console.log('EVENT (fetch)', event, event.request.method);
   if (event.request.method !== 'GET') {
     return;
   }
@@ -171,6 +173,7 @@ self.addEventListener("fetch", (event) => {
 });
 
 self.addEventListener('message', (event) => {
+	console.log('EVENT (message)', event);
   // SkipWaiting can be used to immediately activate a waiting service worker.
   // This will also require a page refresh triggered by the main worker.
   if (event.data === 'skipWaiting') {
