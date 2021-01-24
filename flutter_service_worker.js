@@ -142,9 +142,10 @@ self.addEventListener("fetch", (event) => {
   }
   // If the URL is not the RESOURCE list then return to signal that the
   // browser should take over.
+  var req = null;
   if (key.endsWith('.mp3') || key.endsWith('.m4a')) {
   	console.log('url: ', event.request.url.replace('pwa/index.html#/', 'pwa/assets'));
-  	event.request = new Request(event.request.url.replace('pwa/index.html#/', 'pwa/assets')); 
+  	req = new Request(event.request.url.replace('pwa/index.html#/', 'pwa/assets')); 
   }
   else if (!RESOURCES[key]) {
     return;
@@ -158,9 +159,10 @@ self.addEventListener("fetch", (event) => {
       return cache.match(event.request).then((response) => {
         // Either respond with the cached resource, or perform a fetch and
         // lazily populate the cache.
-        console.log('proba', event.request, event.response);
-        return response || fetch(event.request).then((response) => {
-          cache.put(event.request, response.clone());
+        var targetReq = req || event.request;
+        console.log('proba', targetReq, event.response);
+        return response || fetch(targetReq).then((response) => {
+          cache.put(targetReq, response.clone());
           return response;
         });
       })
