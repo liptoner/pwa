@@ -2,16 +2,15 @@
 const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
-
 const RESOURCES = {
   "version.json": "2a8de261a84fd7b19a0f4902850266e2",
 "manifest.json": "3aa090c891bfde34f0c4701768829ce2",
-"main.dart.js": "28984a9bd31c67e4b65c4c0f6f3da761",
+"main.dart.js": "158906e14d8e5ee8aace5918a34d6022",
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
-"index.html": "d00e546d64b0ddb5dbf38b1f279949df",
-"/": "d00e546d64b0ddb5dbf38b1f279949df",
-"assets/NOTICES": "6052b20f6e35414246a8eb8c71f1a214",
+"index.html": "ad3cba4aa4affa516b4ff49dedcad431",
+"/": "ad3cba4aa4affa516b4ff49dedcad431",
+"assets/NOTICES": "59f068714b784f26ccd189638fde79e2",
 "assets/packages/progress_dialog/assets/double_ring_loading_io.gif": "e5b006904226dc824fdb6b8027f7d930",
 "assets/packages/font_awesome_flutter/lib/fonts/fa-solid-900.ttf": "d21f791b837673851dd14f7c132ef32e",
 "assets/packages/font_awesome_flutter/lib/fonts/fa-brands-400.ttf": "3ca122272cfac33efb09d0717efde2fa",
@@ -39,7 +38,7 @@ const RESOURCES = {
 // The application shell files that are downloaded before a service worker can
 // start.
 const CORE = [
-  // "/",
+  "/",
 "main.dart.js",
 "index.html",
 "assets/NOTICES",
@@ -51,17 +50,7 @@ self.addEventListener("install", (event) => {
   return event.waitUntil(
     caches.open(TEMP).then((cache) => {
       return cache.addAll(
-        CORE.map(function (value) {
-
-try {
-	console.log(value + '?revision=' + RESOURCES[value]);
-	return new Request(value + '?revision=' + RESOURCES[value], {'cache': 'reload'});
-} 
-catch (error) {
-  console.log('ERROR', error);
-}
-
-}));
+        CORE.map((value) => new Request(value + '?revision=' + RESOURCES[value], {'cache': 'reload'})));
     })
   );
 });
@@ -70,8 +59,6 @@ catch (error) {
 // install. If this service worker is upgrading from one with a saved
 // MANIFEST, then use this to retain unchanged resource files.
 self.addEventListener("activate", function(event) {
-	console.log('EVENT1 (activate)', event);
-	return Promise.resolve({});
   return event.waitUntil(async function() {
     try {
       var contentCache = await caches.open(CACHE_NAME);
@@ -128,30 +115,21 @@ self.addEventListener("activate", function(event) {
 // The fetch handler redirects requests for RESOURCE files to the service
 // worker cache.
 self.addEventListener("fetch", (event) => {
-	console.log('EVENT (fetch)', event, event.request.method);
   if (event.request.method !== 'GET') {
     return;
   }
-  console.log('pierwotny url: ', event.request.url);
-
   var origin = self.location.origin;
   var key = event.request.url.substring(origin.length + 1);
   // Redirect URLs to the index.html
   if (key.indexOf('?v=') != -1) {
     key = key.split('?v=')[0];
   }
-  console.log('fetching: ', event.request.url);
   if (event.request.url == origin || event.request.url.startsWith(origin + '/#') || key == '') {
     key = '/';
   }
   // If the URL is not the RESOURCE list then return to signal that the
   // browser should take over.
-  var req = null;
-  if (key.endsWith('.mp3') || key.endsWith('.m4a')) {
-  	console.log('url: ', event.request.url.replace('pwa/index.html#/', 'pwa/assets'));
-  	req = new Request(event.request.url.replace('pwa/index.html#/', 'pwa/assets')); 
-  }
-  else if (!RESOURCES[key]) {
+  if (!RESOURCES[key]) {
     return;
   }
   // If the URL is the index.html, perform an online-first request.
@@ -163,10 +141,8 @@ self.addEventListener("fetch", (event) => {
       return cache.match(event.request).then((response) => {
         // Either respond with the cached resource, or perform a fetch and
         // lazily populate the cache.
-        var targetReq = req || event.request;
-        console.log('proba', targetReq, event.response);
-        return response || fetch(targetReq).then((response) => {
-          cache.put(targetReq, response.clone());
+        return response || fetch(event.request).then((response) => {
+          cache.put(event.request, response.clone());
           return response;
         });
       })
@@ -175,7 +151,6 @@ self.addEventListener("fetch", (event) => {
 });
 
 self.addEventListener('message', (event) => {
-	console.log('EVENT (message)', event);
   // SkipWaiting can be used to immediately activate a waiting service worker.
   // This will also require a page refresh triggered by the main worker.
   if (event.data === 'skipWaiting') {
@@ -206,7 +181,6 @@ async function downloadOffline() {
       resources.push(resourceKey);
     }
   }
-  console.log('ADD_RESOURCES', resources);
   return contentCache.addAll(resources);
 }
 
@@ -216,12 +190,10 @@ function onlineFirst(event) {
   return event.respondWith(
     fetch(event.request).then((response) => {
       return caches.open(CACHE_NAME).then((cache) => {
-        console.log('print', event.request);
         cache.put(event.request, response.clone());
         return response;
       });
     }).catch((error) => {
-      console.log('error', error);
       return caches.open(CACHE_NAME).then((cache) => {
         return cache.match(event.request).then((response) => {
           if (response != null) {

@@ -22,17 +22,9 @@
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
   <script>
-  	console.log('serviceWorker 21231');
-
-  	console.log(Object.keys(navigator));
-  	console.log(navigator, 'serviceWorker' in navigator);
-  	console.log('serviceWorker' in document);
-  	console.log('serviceWorker' in window);
-
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
-      	console.log('called sevice worker 123');
-        navigator.serviceWorker.register('flutter_service_worker.js?v=42571255321');
+        navigator.serviceWorker.register('flutter_service_worker.js?v=3510572181');
       });
     }
   </script>
