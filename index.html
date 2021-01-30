@@ -23,7 +23,11 @@
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
   <script>
-    window.addEventListener('orientationchange', function () {
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        window.addEventListener('orientationchange', function () {
+      console.log(window.orientation);
       if (window.orientation == -90) {
           document.getElementById('orient').className = 'orientright';
       }
@@ -35,9 +39,8 @@
       }
     }, true);
 
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('flutter_service_worker.js?v=3615230773');
+
+        navigator.serviceWorker.register('flutter_service_worker.js?v=2918110976');
       });
     }
   </script>
