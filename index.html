@@ -26,21 +26,8 @@
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
-        window.addEventListener('orientationchange', function () {
-      console.log(window.orientation);
-      if (window.orientation == -90) {
-          document.getElementById('orient').className = 'orientright';
-      }
-      if (window.orientation == 90) {
-          document.getElementById('orient').className = 'orientleft';
-      }
-      if (window.orientation == 0) {
-          document.getElementById('orient').className = '';
-      }
-    }, true);
 
-
-        navigator.serviceWorker.register('flutter_service_worker.js?v=2918110976');
+        navigator.serviceWorker.register('flutter_service_worker.js?v=389260766');
       });
     }
   </script>

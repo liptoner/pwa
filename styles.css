@@ -1,9 +1,19 @@
-.orientleft flt-glass-pane {
+.Oorientleft flt-glass-pane {
     -webkit-transform: rotate(-90deg);
-
+    -webkit-transform-origin: 50% 50%;
 }
 
-.orientright flt-glass-pane {
+.Oorientright flt-glass-pane {
     -webkit-transform: rotate(90deg);
+}
 
+@media (orientation: landscape) {
+  boddddy {
+    -webkit-transform: scale(0.667);
+    		-webkit-transform-origin: top right;
+    		position: absolute;
+    		right: 0;
+    		top: 0;
+    		width: 480px;
+  }
 }
