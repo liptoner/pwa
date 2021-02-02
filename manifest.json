@@ -1,11 +1,11 @@
 {
-    "name": "vocab",
-    "short_name": "vocab",
+    "name": "Vocab.pl",
+    "short_name": "Vocab.pl",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter application.",
+    "description": "Aplikacja do nauki słówek.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
